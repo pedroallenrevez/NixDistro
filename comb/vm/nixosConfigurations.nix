@@ -21,22 +21,23 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
     nix = {
-      # buildMachines = [
-      #   {
-      #     hostName = "192.168.123.150";
-      #     sshUser = "ttt";
-      #     sshKey = "/home/ttt/.ssh/";
-      #     system = "x86_64-linux";
-      #     protocol = "ssh";
-      #     # if the builder supports building for multiple architectures,
-      #     # replace the previous line by, e.g.,
-      #     # systems = ["x86_64-linux" "aarch64-linux"];
-      #     maxJobs = 2;
-      #     speedFactor = 2;
-      #     supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
-      #     mandatoryFeatures = [];
-      #   }
-      # ];
+      # NOTE: This made it possible for coleman build to list vm-vagrant
+      buildMachines = [
+        {
+          hostName = "192.168.1.184";
+          sshUser = "ttt";
+          sshKey = "${PRJ_ROOT}/.vagrant/machines/nix23vm/libvirt/private_key";
+          system = "x86_64-linux";
+          protocol = "ssh";
+          # if the builder supports building for multiple architectures,
+          # replace the previous line by, e.g.,
+          # systems = ["x86_64-linux" "aarch64-linux"];
+          maxJobs = 2;
+          speedFactor = 2;
+          supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+          mandatoryFeatures = [];
+        }
+      ];
       distributedBuilds = true;
 
       gc.automatic = true;
@@ -82,7 +83,7 @@
           "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCrCl14a/OKlOzpntF6lF5/DKDSP9E8QeLZt81cciO517ViUtAtOuxluMEzd2yuzR8tIMrREQ6QAIqKtTlN/EX2OQQaN4ohqqYq3FKkU+gD03XONNGCVsRCI7tmMHq2k5rqk6dqOLLp/aj/5OsKAgop3OU9Bfx2vo5WqKo5au8bCSJE+UVdy8QeSFJ7qJ8mNXVnzzv/Epnbi4Aepglwxfw1s2brFjoRXj+qnxVFlyhQMFdAX11ZwtJ2fR9jjzkezCusJ7D/kPs1Z4+e/VcMzUk7GVFR99RjFD7jpThRgMcKYoj03zhO6XDlk+EBjZbPuWUNlmwTjhFUxl5cPwwXXnAd dar@meerkat"
         ];
       };
-      users.lar = {
+      users.vagrant = {
         shell = pkgs.zsh;
         isNormalUser = true;
         initialPassword = "password123";

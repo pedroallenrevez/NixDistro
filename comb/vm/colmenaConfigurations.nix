@@ -2,7 +2,7 @@
   vagrant = {
     networking.hostName = "vagrant";
     deployment = {
-      # allowLocalDeployment = true;
+      allowLocalDeployment = false;
       targetHost = "192.168.123.195";
       targetPort = 22;
     };
