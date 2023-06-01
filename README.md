@@ -62,6 +62,16 @@ The development environment offers CLI utilities:
 2. `colmena`, `disko`, `home-manager`, `nixos-generate` - wrappers around the nix utilities;
 3. `writedisk` - write your ISOs to an USB stick.
 
+# Deploying with colmena
+
+Build locally all hosts and nodes (remote, not local)
+```
+$ colmena build
+```
+> NOTE: You have to define `nixosConfigurations.nix.buildMachines` and `colmena.deployment.allowLocalDeployment`
+
+
+
 
 # Vagrant VMs
 pamac build cockpit cockpit-machines vagrant
@@ -69,9 +79,9 @@ vagrant plugin install vagrant-libvirt
 systemctl start libvirtd.service
 systemctl start cockpit.socket
 
-# Use virsh (libvirt) to create a local network
+Use virsh (libvirt) to create a local network
 virsh net-list --all
-# Create a net.xml with specifications, routing through mullvad
+Create a net.xml with specifications, routing through mullvad
 ```
 <network>
   <name>mynetwork</name>
@@ -88,8 +98,8 @@ virsh net-define /path/to/mynetwork.xml
 virsh net-start <network-name>
 virsh net-info <network-name>
 
-# follow instructions on vagrantfile for
-# 1. Architecture, memory, disks and firmware 
-# 2. Networking
-# 3. Display of graphical interface
-# install virt-viewer to connect to graphical vms
+follow instructions on vagrantfile for
+1. Architecture, memory, disks and firmware 
+2. Networking
+3. Display of graphical interface
+install virt-viewer, or cockpit to connect to graphical vms
